@@ -70,5 +70,5 @@ for i in range(frame_count):
     		ser.write(chr(temp_LSB))
 img.close()
 print "done"
-        
+
 #there is a "done" byte sent by the sign, ignoring for now
