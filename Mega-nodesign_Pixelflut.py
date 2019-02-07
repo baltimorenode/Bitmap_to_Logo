@@ -7,7 +7,7 @@ All other commands are handled locally in this script
 
 debug = True
 
-import serial, sys, socket 
+import serial, socket # sys, time
 from threading import Thread
 from SocketServer import ThreadingMixIn
 
@@ -46,10 +46,12 @@ class PfServer(Thread):
 		""" To cut down on serial traffic use local frame buffer """
 		return str(Frame_Buffer[row][col]) #need to remove "0x" and left pad 0s
 
+	@classmethod
 	def Get_Size (self):
 		""" the nodesign has a size of 24x48 """
 		return "24 48" #size of sign
 
+	@classmethod
 	def Help (self):
 		""" helpfull message for the user """
 		return "\t:SUPPORTED COMMANDS:\r\nHELP - returns this helpfull information\r\nSIZE - returns screen size (24 by 48)\r\nPX <x> <y> - get color value of pixel X,Y\r\nPX <x> <y> <rrggbb> - set color value of pixel X,Y\r\n(please note r g b max value is 16)\r\n"
@@ -88,7 +90,7 @@ except:
 	exit()
 
 # Multithreaded Python server : TCP Server Socket Program Stub
-TCP_IP = '0.0.0.0' 
+TCP_IP = '0.0.0.0'
 TCP_PORT = 1337
 BUFFER_SIZE = 32  # Usually 1024, but we need quick response 
 
@@ -100,10 +102,10 @@ threads = []
 while True: 
     tcpServer.listen(4)
     print "Multithreaded Python server : Waiting for connections from TCP clients..."
-    (conn, (ip,port)) = tcpServer.accept() 
-    newthread = PfServer(ip,port, nodesign) 
+    (conn, (ip,port)) = tcpServer.accept()
+    newthread = PfServer(ip,port, nodesign)
     newthread.start()
-    threads.append(newthread) 
+    threads.append(newthread)
  
 for t in threads:
-    t.join() 
+    t.join()
