@@ -2,7 +2,7 @@
 #the output is not used directly, copy into sketch header file unsigned int array
 
 from PIL import Image
-from PIL import ImageColor
+# from PIL import ImageColor
 
 #defaults
 image_name = "logo_image.bmp"
@@ -13,7 +13,7 @@ y_max = 24
 #open image
 try:
 	source_file = Image.open(image_name, 'r')
-except:
+except IOError:
 	print "Error: Unable to open image file"
 	exit()
 
@@ -25,7 +25,7 @@ if x_max > source_file.width or y_max > source_file.height:
 #open data file
 try:
 	dest_file = open(data_name, 'w') #this should never fail
-except:
+except IOError:
 	print "Error: Unable to open data file"
 	exit()
 
