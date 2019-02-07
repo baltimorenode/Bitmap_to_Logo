@@ -28,13 +28,13 @@ if (len(sys.argv) > 1):
 #tests before sending
 try:
     img = Image.open(img_name)
-except:
+except IOError:
     print "Error: Image fine not found"
     exit()
 
 try:
     ser = serial.Serial(ser_port)
-except:
+except serial.SerialException:
     print "Error: Serial port not found"
     exit()
 
@@ -59,5 +59,5 @@ for x in range(48):
         ser.write(chr(temp_MSB))
         ser.write(chr(temp_LSB))
 print "done"
-        
+
 #there is a "done" byte sent by the sign, ignoring for now
