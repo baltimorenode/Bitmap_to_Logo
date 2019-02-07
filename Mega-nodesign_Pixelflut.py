@@ -8,12 +8,12 @@ All other commands are handled locally in this script
 debug = True
 
 import serial, sys, socket 
-from threading import Thread 
+from threading import Thread
 from SocketServer import ThreadingMixIn
 
 class PfServer(Thread):
 	def __init__(self, ip, port, ser):
-		Thread.__init__(self) 
+		Thread.__init__(self)
 
 	def run(self):
 		while True:
@@ -92,18 +92,18 @@ TCP_IP = '0.0.0.0'
 TCP_PORT = 1337
 BUFFER_SIZE = 32  # Usually 1024, but we need quick response 
 
-tcpServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-tcpServer.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
-tcpServer.bind((TCP_IP, TCP_PORT)) 
-threads = [] 
+tcpServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcpServer.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+tcpServer.bind((TCP_IP, TCP_PORT))
+threads = []
  
 while True: 
     tcpServer.listen(4)
-    print "Multithreaded Python server : Waiting for connections from TCP clients..." 
+    print "Multithreaded Python server : Waiting for connections from TCP clients..."
     (conn, (ip,port)) = tcpServer.accept() 
     newthread = PfServer(ip,port, nodesign) 
     newthread.start()
     threads.append(newthread) 
  
-for t in threads: 
+for t in threads:
     t.join() 
