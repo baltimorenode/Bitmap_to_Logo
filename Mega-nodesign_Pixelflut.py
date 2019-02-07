@@ -7,7 +7,7 @@ All other commands are handled locally in this script
 
 debug = True
 
-import serial, sys, time, socket 
+import serial, sys, socket 
 from threading import Thread 
 from SocketServer import ThreadingMixIn
 
@@ -98,11 +98,11 @@ tcpServer.bind((TCP_IP, TCP_PORT))
 threads = [] 
  
 while True: 
-    tcpServer.listen(4) 
+    tcpServer.listen(4)
     print "Multithreaded Python server : Waiting for connections from TCP clients..." 
     (conn, (ip,port)) = tcpServer.accept() 
     newthread = PfServer(ip,port, nodesign) 
-    newthread.start() 
+    newthread.start()
     threads.append(newthread) 
  
 for t in threads: 
