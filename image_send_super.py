@@ -4,7 +4,7 @@
 #color components are down-verted from 8bit to 4bit, so use wide range in color values
 
 from PIL import Image
-from PIL import ImageColor
+#from PIL import ImageColor
 import serial, sys
 
 #defaults
@@ -34,7 +34,7 @@ if (len(sys.argv) > 1):
 #open serial port
 try:
     ser = serial.Serial(ser_port, baud_rate)
-except:
+except serial.SerialException:
     print "Error: Serial port not found"
     exit()
 
@@ -45,7 +45,7 @@ for i in range(frame_count):
             img = Image.open(img_name + str(i + 1) + extension)
         else:
             img = Image.open(img_name + extension)
-    except:
+    except IOError:
         print "Error: Image file not found"
         exit()
     if (img.height != max_row or img.width != max_col):
