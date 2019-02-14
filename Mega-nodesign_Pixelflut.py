@@ -85,7 +85,7 @@ try:
 		nodesign = '/dev/null'
 	else:
 		nodesign = serial.Serial(ser_port, baud_rate)
-except:
+except serial.SerialException:
 	print("Unable to connect to sign")
 	exit()
 
