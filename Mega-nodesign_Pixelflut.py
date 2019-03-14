@@ -11,7 +11,7 @@ import sys, time, serial
 
 class ThreadedServer(object):
     def __init__(self, host, port):
-		self.ser_lock = threading.Lock()
+        self.ser_lock = threading.Lock()
         self.host = host
         self.port = port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
