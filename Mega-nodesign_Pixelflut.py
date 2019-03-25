@@ -100,7 +100,7 @@ class ThreadedServer(object):
                 self.ser.write(chr(temp_MSB))
                 self.ser.write(chr(temp_LSB))
                 self.Frame_Buffer[row][col] = color
-                self.Create_Send_Image()
+                self.Create_Send_Image() #this may work better on an interval
 
     def Pixel_Convert (self, val):
         """ convert '0xRRGGBB' to red, green, blue """
@@ -123,6 +123,11 @@ class ThreadedServer(object):
         im.save('image.bmp') #this is a temp file
         #!!!upload to webserver!!!
         #!!!delete temp file!!!
+
+    def Check(self):
+	""" this will be called on periodically to update website """
+	if (self.updated):
+		self.Create_Send_Image()
 
 if __name__ == "__main__":
     port_num = 1337
