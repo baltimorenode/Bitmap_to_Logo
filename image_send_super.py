@@ -9,7 +9,7 @@ import serial, sys
 
 #defaults
 img_name = 'image'
-ser_port = '/dev/ttyUSB0'
+ser_port = '/dev/ttyUSB0' #change this to the correct port
 frame_count = 1
 baud_rate = 115200
 extension = ".bmp"
